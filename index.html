@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Romantic Apology Animation</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #000;
+            background-image: radial-gradient(2px 2px at 20px 30px, #eee, transparent),
+                              radial-gradient(2px 2px at 40px 70px, #fff, transparent),
+                              radial-gradient(1px 1px at 90px 40px, #eee, transparent),
+                              radial-gradient(1px 1px at 130px 80px, #fff, transparent),
+                              radial-gradient(2px 2px at 160px 30px, #ddd, transparent);
+            background-repeat: repeat;
+            background-size: 200px 100px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            color: white;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Floating text */
+        body::before {
+            content: "sorry janu 🫦 sorry janu 🫦 sorry janu 🫦 sorry janu 🫦 sorry janu 🫦";
+            position: absolute;
+            top: 0;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            font-size: 60px;
+            color: rgba(255,192,203,0.05);
+            transform: rotate(-30deg);
+            white-space: nowrap;
+            animation: floatText 30s linear infinite;
+            pointer-events: none;
+        }
+
+        @keyframes floatText {
+            from { transform: translateX(0) rotate(-30deg); }
+            to { transform: translateX(-50%) rotate(-30deg); }
+        }
+
+        .container {
+            text-align: center;
+            background: rgba(0,0,0,0.7);
+            padding: 20px;
+            border-radius: 10px;
+            z-index: 2;
+            position: relative;
+        }
+
+        .container::before {
+            content: "sorry 🫦";
+            position: absolute;
+            font-size: 100px;
+            color: pink;
+            opacity: 0.1;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+        }
+
+        .first-box, .second-box {
+            border: 2px solid pink;
+            border-radius: 10px;
+            padding: 10px;
+            box-shadow: 0 4px 8px rgba(255,20,147,0.5);
+        }
+
+        .second-box {
+            display: none;
+            margin-top: 20px;
+        }
+
+        button {
+            background: #ff69b4;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 18px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .typed-text {
+            border-right: 2px solid white;
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+            50% { border-color: transparent; }
+        }
+
+        /* Start screen */
+        #startScreen {
+            position: fixed;
+            inset: 0;
+            background: black;
+            color: pink;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 26px;
+            z-index: 10;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- TAP TO START -->
+<div id="startScreen">Tap to start ❤️</div>
+
+<!-- BACKGROUND MUSIC -->
+<audio id="bgMusic" loop>
+    <!-- Upload your song as song.mp3 -->
+    <source src="song.mp3" type="audio/mpeg">
+</audio>
+
+<div class="container">
+    <div class="first-box">
+        <h2 id="firstText" class="typed-text"></h2>
+        <button onclick="showSecondBox()">kiss me 🫦</button>
+    </div>
+
+    <div class="second-box" id="secondBox">
+        <p id="secondText" class="typed-text"></p>
+    </div>
+</div>
+
+<script>
+    const firstText = "Sorry my Ayesha Janu Baby Item Cutie Beautiful Girl 💖";
+    const secondText = "Narazgi teri samajhta hoon, galti meri hi sahi, par dil aaj bhi sirf tera hai. Meri jaan baby, beautiful girl, teri aankhon ki chamak aur teri lips pr bite krne wala hu me hi 🫦🫦🫦";
+
+    function typeWriter(el, text, speed = 100) {
+        let i = 0;
+        el.textContent = '';
+        function type() {
+            if (i < text.length) {
+                el.textContent += text.charAt(i++);
+                setTimeout(type, speed);
+            } else {
+                el.classList.remove('typed-text');
+            }
+        }
+        type();
+    }
+
+    document.getElementById("startScreen").addEventListener("click", () => {
+        document.getElementById("startScreen").style.display = "none";
+        document.getElementById("bgMusic").play();
+        typeWriter(document.getElementById("firstText"), firstText);
+    });
+
+    function showSecondBox() {
+        document.getElementById("secondBox").style.display = "block";
+        typeWriter(document.getElementById("secondText"), secondText);
+    }
+</script>
+
+</body>
+</html>
